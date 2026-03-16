@@ -676,6 +676,62 @@
       margin-top: 14px;
     }
 
+    /* HIPAA Notice Bar */
+    .hipaa-notice {
+      background: var(--teal-light);
+      border: 1px solid rgba(11, 110, 110, 0.2);
+      border-radius: 10px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .hipaa-icon {
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .hipaa-notice span:last-child {
+      font-size: 0.9rem;
+      color: var(--gray-600);
+      line-height: 1.6;
+    }
+
+    /* HIPAA Consent Checkbox */
+    .hipaa-consent {
+      margin-top: 14px;
+      margin-bottom: 8px;
+    }
+
+    .consent-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      cursor: pointer;
+      font-size: 13px;
+      color: var(--gray-400);
+      line-height: 1.5;
+    }
+
+    .consent-label input[type="checkbox"] {
+      margin-top: 3px;
+      flex-shrink: 0;
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+
+    .consent-label a {
+      color: var(--teal);
+      text-decoration: underline;
+    }
+
+    .consent-label a:hover {
+      color: var(--coral);
+    }
+
     #form-success {
       display: none;
       text-align: center;
@@ -952,6 +1008,10 @@
     <!-- Quick Form -->
     <section class="quick-form" id="contact" aria-labelledby="form-title">
       <div class="container">
+        <div class="hipaa-notice">
+          <span class="hipaa-icon">🔒</span>
+          <span>Your information is protected. We follow HIPAA privacy guidelines and will never sell or share your personal information without your consent.</span>
+        </div>
         <div class="form-grid">
           <div class="form-intro">
             <h2 id="form-title">Need Help Fast?</h2>
@@ -983,6 +1043,12 @@
                 <label for="situation">What's going on?</label>
                 <textarea id="situation" name="situation" placeholder="Brief description of who needs care and what kind of help you're looking for..."></textarea>
               </div>
+              <div class="hipaa-consent">
+                <label class="consent-label">
+                  <input type="checkbox" id="hipaaConsent" required>
+                  <span>I understand that the information I provide may include personal health details. By submitting this form, I consent to its use for senior placement assistance. View our <a href="/privacy.html" target="_blank">Privacy Policy</a>. <strong>Do not include Social Security numbers, insurance IDs, or detailed medical records in this form.</strong></span>
+                </label>
+              </div>
               <button type="submit" class="btn btn-coral form-submit">Request a Callback</button>
               <p class="form-disclaimer">Free service. No obligation. We'll call you back soon.</p>
             </form>
@@ -998,11 +1064,12 @@
     <div class="container">
       <a href="tel:+18662533463" class="footer-phone">866-ALF-FIND</a>
       <p class="footer-tagline">Free senior placement — one call connects you to care</p>
+      <p style="font-size: 0.85rem; color: var(--gray-400); margin-top: 16px; max-width: 600px; line-height: 1.6; margin-left: auto; margin-right: auto;">This service operates in compliance with HIPAA privacy guidelines. Information shared with 866-ALF-FIND is kept strictly confidential and used solely for placement assistance purposes.</p>
       <hr class="footer-divider">
       <div class="footer-bottom">
         <span>&copy; <script>document.write(new Date().getFullYear())</script> 866-ALF-FIND. All rights reserved.</span>
         <nav class="footer-links" aria-label="Legal">
-          <a href="#">Privacy Policy</a>
+          <a href="/privacy.html">Privacy Policy</a>
           <a href="#">Terms</a>
         </nav>
       </div>
@@ -1027,9 +1094,15 @@
 
         var name = form.elements['name'];
         var phone = form.elements['phone'];
+        var hipaaConsent = document.getElementById('hipaaConsent');
 
         if (!name.value.trim() || !phone.value.trim()) {
           alert('Please enter your name and phone number.');
+          return;
+        }
+
+        if (!hipaaConsent.checked) {
+          alert('Please acknowledge the privacy consent to continue.');
           return;
         }
 
