@@ -7,8 +7,8 @@ Static lead-generation landing page for the **866-ALF-FIND** phone number brand 
 - Single-page static site (`index.html`) — no build step, no dependencies
 - Deep teal + orange design language; mobile-first, fully responsive
 - Lead capture form that POSTs to `https://highervisiohealth.com/leads`
-- Embedded [Helo](https://askhelo.com) chatbot for instant visitor engagement
 - All CSS self-contained in a `<style>` block; one external font (Google Fonts Inter)
+- Google Maps embed showing nationwide service area
 
 ## Deploy to Cloudflare Pages
 
@@ -49,6 +49,3 @@ fetch('https://highervisiohealth.com/leads', {
 
 And replace the URL with your actual endpoint.
 
-## Chatbot (Helo)
-
-The Helo embed is configured at the bottom of `index.html`. Update `clientId` from `hvh-placeholder` to the real client ID once provisioned by askhelo.com.
