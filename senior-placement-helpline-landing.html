@@ -968,6 +968,137 @@
     .text-center { text-align: center; }
     .mb-8 { margin-bottom: 8px; }
     .mt-40 { margin-top: 40px; }
+
+    /* ── COLOR SCHEME SWITCHER (dev tool) ── */
+    .theme-switcher {
+      position: fixed;
+      bottom: 90px;
+      right: 18px;
+      z-index: 500;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+      padding: 14px 16px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #333;
+      min-width: 130px;
+    }
+
+    @media (min-width: 769px) {
+      .theme-switcher { bottom: 28px; }
+    }
+
+    .theme-switcher-label {
+      margin-bottom: 10px;
+      color: #999;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+    }
+
+    .theme-swatches {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .theme-swatch {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      cursor: pointer;
+      padding: 6px 8px;
+      border-radius: 6px;
+      border: 2px solid transparent;
+      transition: border-color 0.15s, background 0.15s;
+      background: none;
+      text-align: left;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: #444;
+      text-transform: uppercase;
+    }
+
+    .theme-swatch:hover { background: #f5f5f5; }
+    .theme-swatch.active { border-color: #aaa; background: #f0f0f0; }
+
+    .swatch-dot {
+      display: flex;
+      gap: 3px;
+      flex-shrink: 0;
+    }
+
+    .swatch-dot span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: block;
+    }
+
+    /* Theme: Navy/Crimson (default — already set in :root) */
+    html[data-theme="navy"] {
+      --navy:       #1A3A6B;
+      --navy-dark:  #112549;
+      --navy-light: #2a4e8a;
+      --crimson:    #C0202E;
+      --crimson-dk: #9a1823;
+      --gold:       #C8A951;
+      --gold-pale:  rgba(200,169,81,0.12);
+      --cream:      #F8F6F2;
+    }
+
+    /* Theme: Teal/Coral */
+    html[data-theme="teal"] {
+      --navy:       #0b6e6e;
+      --navy-dark:  #085858;
+      --navy-light: #0d8080;
+      --crimson:    #e8622a;
+      --crimson-dk: #c94f1a;
+      --gold:       #ffd3b6;
+      --gold-pale:  rgba(232,98,42,0.1);
+      --cream:      #f0fafa;
+    }
+
+    /* Theme: Forest/Sage */
+    html[data-theme="forest"] {
+      --navy:       #2d5a27;
+      --navy-dark:  #1e3d1a;
+      --navy-light: #3d7a36;
+      --crimson:    #c17f24;
+      --crimson-dk: #9e6518;
+      --gold:       #e8c97a;
+      --gold-pale:  rgba(193,127,36,0.1);
+      --cream:      #f5f8f0;
+    }
+
+    /* Theme: Deep Purple/Gold */
+    html[data-theme="purple"] {
+      --navy:       #3d1f6e;
+      --navy-dark:  #2a1249;
+      --navy-light: #543090;
+      --crimson:    #c8963c;
+      --crimson-dk: #a87830;
+      --gold:       #f0d080;
+      --gold-pale:  rgba(200,150,60,0.1);
+      --cream:      #f7f4fc;
+    }
+
+    /* Theme: Slate/Warm Orange */
+    html[data-theme="slate"] {
+      --navy:       #2c3e5a;
+      --navy-dark:  #1a2740;
+      --navy-light: #3c5478;
+      --crimson:    #d4602a;
+      --crimson-dk: #b04d20;
+      --gold:       #f0c060;
+      --gold-pale:  rgba(212,96,42,0.1);
+      --cream:      #f5f6f8;
+    }
   </style>
 </head>
 <body>
@@ -1527,6 +1658,43 @@
       Call 866-ALF-FIND Free
     </a>
   </div>
+
+  <!-- COLOR SCHEME SWITCHER (dev preview tool) -->
+  <div class="theme-switcher" role="region" aria-label="Color theme switcher">
+    <div class="theme-switcher-label">Color Scheme</div>
+    <div class="theme-swatches">
+      <button class="theme-swatch active" data-theme="navy" onclick="setTheme('navy', this)">
+        <span class="swatch-dot"><span style="background:#1A3A6B"></span><span style="background:#C0202E"></span><span style="background:#C8A951"></span></span>
+        Navy &amp; Crimson
+      </button>
+      <button class="theme-swatch" data-theme="teal" onclick="setTheme('teal', this)">
+        <span class="swatch-dot"><span style="background:#0b6e6e"></span><span style="background:#e8622a"></span><span style="background:#ffd3b6"></span></span>
+        Teal &amp; Coral
+      </button>
+      <button class="theme-swatch" data-theme="forest" onclick="setTheme('forest', this)">
+        <span class="swatch-dot"><span style="background:#2d5a27"></span><span style="background:#c17f24"></span><span style="background:#e8c97a"></span></span>
+        Forest &amp; Gold
+      </button>
+      <button class="theme-swatch" data-theme="purple" onclick="setTheme('purple', this)">
+        <span class="swatch-dot"><span style="background:#3d1f6e"></span><span style="background:#c8963c"></span><span style="background:#f0d080"></span></span>
+        Purple &amp; Gold
+      </button>
+      <button class="theme-swatch" data-theme="slate" onclick="setTheme('slate', this)">
+        <span class="swatch-dot"><span style="background:#2c3e5a"></span><span style="background:#d4602a"></span><span style="background:#f0c060"></span></span>
+        Slate &amp; Orange
+      </button>
+    </div>
+  </div>
+
+  <script>
+    function setTheme(theme, btn) {
+      document.documentElement.setAttribute('data-theme', theme);
+      document.querySelectorAll('.theme-swatch').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+    }
+    // Set default
+    document.documentElement.setAttribute('data-theme', 'navy');
+  </script>
 
   <script>
     (function() {
